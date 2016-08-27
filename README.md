@@ -72,6 +72,26 @@ Here are the steps for the first version of the Wrap Method:
 - it seems like no amount of time will be enough to understand everything you need to do to make a change
 - you have to walk blindly into the code and start.
 - Changes often take a long time for another very common reason: lag time. Lag time is the amount of time that passes between a change that you make and the moment that you get real feedback about the change
+- Dependencies can be problematic, but, fortunately, we can break them. In object-oriented code, often the first step is to attempt to instantiate the classes that we need in a test harness.
+
+
+### How Do I Add a Feature
+- In general, it's better to confront the beast than hide from it.
+- The most powerful feature-addition technique I know of is test-driven development (TDD).
+
+#### Test-driven development 
+- Write a failing test case.
+- Get it to compile.
+- Make it pass.
+- Remove duplication.
+- Repeat.
+
+#### TDD and Legacy Code
+- One of the most valuable things about TDD is that it lets us concentrate on one thing at a time.
+- We are either writing code or refactoring; we are never doing both at once.
+- That separation is particularly valuable in legacy code because it lets us write new code independently of new code.
+
+
 
 
 
