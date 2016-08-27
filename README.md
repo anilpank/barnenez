@@ -25,11 +25,11 @@ It is important to choose the right type of seam when you want to get pieces of 
 refactoring (n.). A change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its existing behavior.
 Try out some refactoring tools
 
-CHANGING SOFTWARE
-I Don't Have Much Time and I Have to Change It
-With tests around the code, nailing down functional problems is often easier.
-Assume the worst case. The change was simple, but we got the code around the change under test anyway; we make all of our changes correctly. Were the tests worth it? We don't know when we shall get back to that area of the code and make another change.
-Would it be easier to understand if the classes were smaller and there were unit tests? Chances are, it would.
-When you get over the hump, life isn't completely rosy, but it is better. When you know the value of testing and you've felt the difference, the only thing that you have to deal with is the cold, mercenary decision of what to do in each particular case.
+### CHANGING SOFTWARE
+- I Don't Have Much Time and I Have to Change It
+- With tests around the code, nailing down functional problems is often easier.
+- Assume the worst case. The change was simple, but we got the code around the change under test anyway; we make all of our changes correctly. Were the tests worth it? We don't know when we shall get back to that area of the code and make another change.
+- Would it be easier to understand if the classes were smaller and there were unit tests? Chances are, it would.
+- When you get over the hump, life isn't completely rosy, but it is better. When you know the value of testing and you've felt the difference, the only thing that you have to deal with is the cold, mercenary decision of what to do in each particular case.
 
 
