@@ -92,6 +92,100 @@ Here are the steps for the first version of the Wrap Method:
 - That separation is particularly valuable in legacy code because it lets us write new code independently of new code.
 
 
+### I Can't Get This Class into a Test Harness
+
+#### Most common problems in getting class into Test Harness
+- Objects of the class can't be created easily.
+- The constructor we need to use has bad side effects.
+-  Significant work happens in the constructor, and we need to sense it.
+
+#### How do we get started? How to take care of irritating parameters
+- the best approach is to just try to do it.
+- We could do a lot of analysis to find out why it would or would not be easy or hard, but it is just as easy to create a JUnit test class, type this into it, and compile the code:
+public void testCreate() {
+     LegacyClass validator = new LegacyClass();
+}
+- the best way to make a fake object is to use Extract Interface.
+
+#### Test Code vs. Production Code
+- Test code doesn't have to live up to the same standards as production code.
+- I don't mind breaking encapsulation by making variables public if it makes it easier to write tests.
+
+#### Pass Null
+- When you are writing tests and an object requires a parameter that is hard to construct, consider just passing null instead.
+-  If the parameter is used in the course of your test execution, the code will throw an exception and the test harness will catch the exception. 
+
+#### Null Object Pattern
+- The Null Object Pattern is a way of avoiding the use of null in programs. 
+- An instance of NullEmployee has no name and no address, and when you tell it to pay, it just does nothing
+
+#### Other ways of approaching irritating parameters.
+- Pass Null and Extract Interface are two ways of approaching irritating parameters. 
+- If the problematic dependency in a parameter isn't hard-coded into its constructor, we can use Subclass and Override Method to get rid of the dependency.
+- If the constructor of Base class uses its connect method to form a connection, we could break the dependency by overriding connect() in a testing subclass.
+
+#### The Case of the Hidden Dependency
+- Some classes are deceptive. We look at them, we find a constructor that we want to use, and we try to call it. Then, bang! We run into an obstacle. One of the most common obstacles is hidden dependency.
+-  The constructor uses some resource that we just can't access nicely in our test harness.
+- The fundamental problem here is that the dependency on some special class is hidden in the constructor.
+- One of the techniques we can use is Parameterize Constructor.
+- With this technique, we externalize a dependency that we have in a constructor by passing it into the constructor.
+- Dependencies hidden in constructors can be tackled with many techniques. Often we can use Extract and Override Getter (352), Extract and Override Factory Method, and Supersede Instance Variable, but I like to use Parameterize Constructor (379) as often as I can.
+
+#### To Parameterize Constructor, follow these steps:
+
+- Identify the constructor that you want to parameterize and make a copy of it.
+
+- Add a parameter to the constructor for the object whose creation you are going to replace. Remove the object creation and add an assignment from the parameter to the instance variable for the object.
+
+- If you can call a constructor from a constructor in your language, remove the body of the old constructor and replace it with a call to the old constructor. Add a new expression to the call of the new constructor in the old constructor. If you canâ€™t call a constructor from another constructor in your language, you may have to extract any duplication among the constructors to a new method.
+
+#### Construction Blob
+- Parameterize Constructor is one of the easiest techniques that we can use to break hidden dependencies in a constructor.
+-  If a constructor constructs a large number of objects internally or accesses a large number of globals, we could end up with a very large parameter list.
+-  In worse situations, a constructor creates a few objects and then uses them to create other objects.
+- One option to solve this is to supersede instance variable.
+void supersedeCursor(FocusWidget newCursor) {
+    cursor = newCursor;
+}
+- We can't use it on final instance variables in Java.
+
+
+
+
+
+#### Irritating Global Dependencies aka Singletons
+
+- The first step is to add a new static method to the singleton class. The method allows us to replace the static instance in the singleton.
+
+    public static void setTestingInstance(MyRepo newInstance)
+    {
+        instance = newInstance;
+    }
+	
+- Reset For Testing
+
+  public class MyRepo
+{
+    ...
+    public void resetForTesting() {
+        instance = null;
+    }
+    ...
+}
+If we call this method in our test setUp (and it's a good idea to call it in tearDown also), we can create fresh singletons for every test.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
